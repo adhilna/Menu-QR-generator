@@ -10,10 +10,11 @@ class QRcodeForm(forms.Form):
 
         })
         )
-    url = forms.URLField(max_length=128,
-                         label='Menu URL',
-                         widget=forms.URLInput(attrs={
-                            'class': 'form-control',
-                            'placeholder': 'Enter the URL for your online-menu'
-                         })
-                         )
+    url = forms.URLField(
+        max_length=128,
+        label='Menu URL',
+        widget=forms.URLInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter the URL for your online-menu'
+        })
+        )
