@@ -22,8 +22,12 @@
         <!-- QR CODE Result -->
         <div class="container mt-5 align-items-center text-center">
             <h2>{{ res_name }}</h2>
-            <img src="{{ qr_url }}" alt="QR Code" style="border: 1px solid black;">
-
+            <img src="{{ qr_url }}" alt="QR Code" style="border: 1px solid black; margin-top: 20px; height: 500px; width: 500px;">
+            <div>
+                <a href="{{ qr_url }}" download="{{ file_name }}" class="btn btn-primary mt-3">Download QR Code</a>
+                <br>
+                <small>Thankyou for using our QR Code generator code</small>
+            </div>
         </div>
 </body>
 </html> 
