@@ -3,7 +3,9 @@ from .forms import QRcodeForm
 import qrcode
 from django.conf import settings
 import os
+import logging
 
+logger = logging.getLogger(__name__)
 
 def generate_qr_code(request):
     if request.method == 'POST':
@@ -13,31 +15,31 @@ def generate_qr_code(request):
                 res_name = form.cleaned_data['restaurant_name']
                 url = form.cleaned_data['url']
 
+                # Generate QR code
+                qr = qrcode.make(url)
+                file_name = res_name.replace(' ', '_').lower() + '_menu.png'
+                file_path = os.path.join(settings.MEDIA_ROOT, file_name)
 
-            # GENERATE QR CODE
-            qr = qrcode.make(url)
-            file_name = res_name.replace(' ', '_').lower() + '_menu.png'
-            file_path = os.path.join(settings.MEDIA_ROOT, file_name)   # ../media/the_kitchen_menu.png
-            qr.save(file_path)
+                # Ensure media directory exists
+                os.makedirs(settings.MEDIA_ROOT, exist_ok=True)
 
+                qr.save(file_path)
 
-            # CREATE IMAGE URL
-            qr_url = settings.MEDIA_URL + file_name  # This should be correct
-
-
-            context = {
-                'res_name': res_name,
-                'qr_url': qr_url,
-                'file_name': file_name,
-            }
-            return render(request, 'rq_result.html', context)
-
-        except :
-            print("error ind mutte")
-
+                qr_url = settings.MEDIA_URL + file_name
+                context = {
+                    'res_name': res_name,
+                    'qr_url': qr_url,
+                    'file_name': file_name,
+                }
+                return render(request, 'rq_result.html', context)
+            else:
+                return render(request, 'generate_qr_code.html', {'form': form})
+        except Exception as e:
+            logger.error("QR generation error: %s", e, exc_info=True)
+            return render(request, 'generate_qr_code.html', {
+                'form': QRcodeForm(),
+                'error': "An error occurred while generating the QR code."
+            })
     else:
         form = QRcodeForm()
-        context = {
-            'form' : form
-        }
-        return render(request, 'generate_qr_code.html', context)
+        return render(request, 'generate_qr_code.html', {'form': form})
