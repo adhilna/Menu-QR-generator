@@ -7,10 +7,11 @@ import os
 
 def generate_qr_code(request):
     if request.method == 'POST':
-        form = QRcodeForm(request.POST)
-        if form.is_valid():
-            res_name = form.cleaned_data['restaurant_name']
-            url = form.cleaned_data['url']
+        try:
+            form = QRcodeForm(request.POST)
+            if form.is_valid():
+                res_name = form.cleaned_data['restaurant_name']
+                url = form.cleaned_data['url']
 
 
             # GENERATE QR CODE
@@ -30,6 +31,9 @@ def generate_qr_code(request):
                 'file_name': file_name,
             }
             return render(request, 'rq_result.html', context)
+
+        except :
+            print("error ind mutte")
 
     else:
         form = QRcodeForm()
