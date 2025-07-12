@@ -133,11 +133,5 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'difijkjwp',
-#     'API_KEY': '986929733174389',
-#     'API_SECRET': 'WlEiytMoBOW3ztVoGaflUOD9UHI',
-# }
-
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticCloudinaryStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

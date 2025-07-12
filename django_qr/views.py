@@ -8,6 +8,7 @@ from django.conf import settings
 import os
 import traceback
 import uuid
+import cloudinary.utils
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +49,16 @@ def generate_qr_code(request):
                 # Save to default storage (Cloudinary)
                 file_content = ContentFile(buffer.getvalue())
                 saved_path = default_storage.save(file_name, file_content)
-                qr_url = default_storage.url(saved_path)
+                from cloudinary.utils import cloudinary_url
+                qr_url, options = cloudinary_url(
+                saved_path,
+                resource_type="image",
+                type="upload",
+                transformation=[
+                    {"flags": "attachment"}
+                ],
+                attachment=file_name
+                )
                 print("✅ SAVED_PATH =", saved_path)
                 print("✅ QR_URL =", qr_url)
 

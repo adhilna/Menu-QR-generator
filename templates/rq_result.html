@@ -98,7 +98,7 @@
             <img src="{{ qr_url }}" alt="QR Code for {{ res_name }}" class="qr-image">
         </div>
         <div class="mb-3">
-            <a href="{{ qr_url }}" download="{{ file_name }}" class="btn btn-primary me-2">Download QR Code</a>
+            <a href="{{ qr_url }}" class="btn btn-primary me-2">Download QR Code</a>
             <a href="{% url 'generate_qr_code' %}" class="btn btn-outline-secondary">Generate Another</a>
         </div>
         <div class="alert alert-info">
