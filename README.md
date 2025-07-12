@@ -42,7 +42,7 @@ CLOUDINARY_API_SECRET=your-api-secret
 ```
 
 🖥️ Run Locally
-
+```
 git clone https://github.com/adhilna/Menu-QR-generator
 cd qr-code-generator
 python -m venv venv
@@ -50,13 +50,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 python manage.py runserver
-
+```
 🌩️ Deployment Notes
-
+```
 Deployed on Render
 Static/media files stored via Cloudinary
 Used environment variables for production secrets
 cloudinary_storage handles file uploads
-
+```
 ⭐️ Show Your Support
 If you like this project, give it a ⭐ on GitHub and share it with others!
