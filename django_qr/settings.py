@@ -139,4 +139,5 @@ CLOUDINARY_STORAGE = {
 #     'API_SECRET': 'WlEiytMoBOW3ztVoGaflUOD9UHI',
 # }
 
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticCloudinaryStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
